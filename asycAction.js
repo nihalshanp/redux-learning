@@ -60,9 +60,9 @@ const fetchUsers = () => {
   return (dispatch) => {
     dispatch(fetchUsersRequest());
     axios
-      .get("http://jsonplaceholder.typicode.com/user")
+      .get("http://jsonplaceholder.typicode.com/users")
       .then((respons) => {
-        let users = respons.data.map((user) => user.id);
+        let users = respons.data
         dispatch(fetchUsersSuccess(users));
       })
       .catch((err) => {
@@ -73,6 +73,6 @@ const fetchUsers = () => {
 
 const store = createStore(reduser, applyMiddleware(thunkMiddleware));
 store.subscribe(() => {
-  console.log(store.getState());
+  console.log(store.getState().users);
 });
 store.dispatch(fetchUsers())
